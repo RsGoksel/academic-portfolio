@@ -9,9 +9,9 @@ artefacts they reference: figure sources, probe scripts, raw data.
 
 ## Publications
 
-| # | Title | Link | Content | Category |
+| # | Folder | Link | Content | Category |
 |---|---|---|---|---|
-| 01 | A Single-Snapshot Audit of 18 Tor Search Engines | _coming soon_ | Liveness, latency, and silent-failure taxonomy of Tor-network search engines; reproducibility bundle included | Preprint / Technical report |
+| 01 | [darkweb-search-engine-audit](papers/darkweb-search-engine-audit/) | _coming soon_ | A Single-Snapshot Audit of 18 Tor Search Engines — liveness, latency, and silent-failure taxonomy; reproducibility bundle included | Preprint / Technical report |
 
 ---
 
@@ -22,9 +22,9 @@ For the paper itself, cite the ResearchGate publication directly.
 For the code or the supplementary bundle accompanying a paper, link to the
 folder at a specific commit:
 
-> Gündüz, K. G. (2026). academic-portfolio (paper 01 supplementary)
+> Gündüz, K. G. (2026). academic-portfolio (darkweb-search-engine-audit)
 > [Software]. GitHub.
-> https://github.com/RsGoksel/academic-portfolio/tree/main/papers/01-darkweb-search-engine-audit
+> https://github.com/RsGoksel/academic-portfolio/tree/main/papers/darkweb-search-engine-audit
 
 For the repository as a whole:
 

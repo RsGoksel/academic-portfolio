@@ -1,4 +1,6 @@
-# Paper 01 — A Single-Snapshot Audit of 18 Tor Search Engines
+# darkweb-search-engine-audit
+
+**A Single-Snapshot Audit of 18 Tor Search Engines: Liveness, Latency, and Silent Failure Modes**
 
 > **ResearchGate publication:** _(link pending upload)_
 
