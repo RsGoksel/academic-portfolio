@@ -3,7 +3,7 @@
 Code, figures, and supplementary materials for academic papers and articles.
 
 The papers themselves live on ResearchGate. This repository carries the working
-artefacts they reference: figure sources, probe scripts, raw data, build tooling.
+artefacts they reference: figure sources, probe scripts, raw data.
 
 ---
 
@@ -15,27 +15,20 @@ artefacts they reference: figure sources, probe scripts, raw data, build tooling
 
 ---
 
-## MCP registry refresh
-
-Daily-refreshed snapshots of the public MCP server ecosystem live in
-[`mcp-scrape/data/`](mcp-scrape/data/). A GitHub Actions workflow runs the
-incremental update at 04:00 UTC every day and commits new entries as they
-appear.
-
-- **mcpservers.org** — community-curated registry (8,233 entries at first scrape)
-- **mcpmarket.com** — sitemap-discoverable registry (33,973 entries at first scrape)
-
-See [`mcp-scrape/README.md`](mcp-scrape/README.md) for details.
-
----
-
 ## How to cite
 
-Cite the ResearchGate publication for the paper directly. For the code or
-data, please link to a file at a specific commit, for example:
+For the paper itself, cite the ResearchGate publication directly.
 
-> Gündüz, K. G. (2026). academic-portfolio: Code and supplementary materials
-> [Software]. GitHub. https://github.com/RsGoksel/academic-portfolio
+For the code or the supplementary bundle accompanying a paper, link to the
+folder at a specific commit:
+
+> Gündüz, K. G. (2026). academic-portfolio (paper 01 supplementary)
+> [Software]. GitHub.
+> https://github.com/RsGoksel/academic-portfolio/tree/main/papers/01-darkweb-search-engine-audit
+
+For the repository as a whole:
+
+> https://github.com/RsGoksel/academic-portfolio
 
 ---
 
