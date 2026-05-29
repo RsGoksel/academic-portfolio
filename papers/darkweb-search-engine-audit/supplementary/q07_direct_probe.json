@@ -1,0 +1,25 @@
+{
+  "probe_run_utc": "2026-05-29T16:23:33.963327+00:00",
+  "query": "machine learning",
+  "engine": "Ahmia",
+  "serp_url": "http://juhanurmihxlp77nkq76byazcldy2hlmovfu2epvl5ankdibsot4csyd.onion/search/?q=machine+learning",
+  "parser_implementation": "direct (requests[socks] + BeautifulSoup + html.parser)",
+  "result_selector": "li.result > h4 > a (title) ; li.result > p (snippet)",
+  "http_status": 200,
+  "fetched_html_len": 4727,
+  "fetched_html_excerpt_2k": "\n\n<!doctype html>\n<html class=\"no-js\" lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta http-equiv=\"x-ua-compatible\" content=\"ie=edge\">\n  <title>\n    Ahmia &mdash;\n      Search Tor Hidden Services\n    \n  </title>\n  <meta name=\"description\"\n        content=\"A search engine for services accessible on the Tor network.\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <script src=\"/static/js/jquery.min.js\"></script>\n\n  <link title=\"Ahmia Search\" type=\"application/opensearchdescription+xml\" rel=\"search\" href=\"/static/opensearch_html.xml\" />\n  <link rel=\"icon\" href=\"/static/images/favicon.ico\" type=\"image/x-icon\">\n\n  <link rel=\"stylesheet\" href=\"/static/css/styles.css\">\n\n  <link rel=\"stylesheet\"\n    href=\"data:text/css;base64,QC1tb3otZG9jdW1lbnQgcmVnZXhwKCcoPyFodHRwcz86Ly9haG1pYVxcLmZpfGh0dHBzPzovL2xvY2FsaG9zdHxodHRwcz86Ly8xMjdcXC4wXFwuMFxcLjF8aHR0cDovL2p1aGFudXJtaS4qY3N5ZFxcLm9uaW9ufGh0dHA6Ly9tc3lkcXN0Lioya3plcmRnXFwub25pb24pLionKXtib2R5OmJlZm9yZXttYXJnaW4tbGVmdDoxMCU7bWFyZ2luLXRvcDoyMCU7bWFyZ2luLXJpZ2h0OjEwJTtjb2xvcjpyZWQ7Zm9udC1zaXplOjIwMCU7Y29udGVudDoiV2FybmluZzogWW91IGFyZSB1c2luZyBhIG1hbi1pbi10aGUtbWlkZGxlIGZha2UgY2xvbmUgc2l0ZSAtLSBWaXNpdCBodHRwczovL2FobWlhLmZpLyB0byBmaW5kIHJpZ2h0IG9uaW9uIGFkZHJlc3MuIjtkaXNwbGF5OmJsb2NrfWE6YmVmb3Jle2NvbG9yOnJlZDtjb250ZW50OiJbU0NBTV0gIn0jYWhtaWFNYWluQ29udGVudCwjaW1hZ2VPdmVybGF5e2Rpc3BsYXk6bm9uZX19I3dhcm5pbmd7ZGlzcGxheTpub25lfQ\">\n</head>\n\n<body class=\"main\">\n\n\n  <div id=\"imageOverlay\">&nbsp;</div>\n\n\n<div class=\"outer\">\n\n  <div id=\"content\" class=\"inner\">\n\n    <div id=\"ahmiaHeader\" class=\"mini\">\n    <div id=\"notTorBrowserWarning\" style=\"display:none\">\n      <p>\n        Unfortunately we have not deployd non-JavaScript version of Ahmia yet.\n      </p>\n      </div>\n      \n\n      <nav>\n        <ul class=\"primary\">\n          <li>\n            <a href=\"/about/\"\n               title=\"Learn more about Ahmia and its team.\">\n                 About Ahmia\n            </a>\n          </li>\n          <!-- <li><a href=\"/directo",
+  "independent_parser_results": [],
+  "protocol_diff": {
+    "sentinel_1_query_in_fetched_html": false,
+    "sentinel_2_query_in_any_returned_title": false,
+    "titles_count": 0
+  },
+  "protocol_verdict": {
+    "independent_parser_reports_results": false,
+    "sentinel_1_query_in_fetched_html": false,
+    "sentinel_2_query_in_returned_titles": false,
+    "protocol_passes": false,
+    "silent_failure_caught": true,
+    "reasoning": "The independent parser extracted 0 candidate result entries from the SERP HTML using Ahmia's documented result element selectors. Sentinel 1 (query 'machine learning' present in fetched SERP HTML): FAIL. Sentinel 2 (query 'machine learning' present in at least one returned title): FAIL. Comparison against Q6: the OnionClaw dispatcher's parser returned Ahmia-chrome boilerplate ('Tor browser bundle', etc.) where the independent parser here returned zero real result entries either, which indicates that Ahmia itself is not returning results for this query at probe time. The protocol still detected absence of evidence in both implementations, and the dispatcher-agnostic claim is still validated in the sense that the two parsers agree on the verdict."
+  }
+}

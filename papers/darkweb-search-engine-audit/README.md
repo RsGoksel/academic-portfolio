@@ -41,9 +41,14 @@ ResearchGate publication.
 - `q00_precheck.json` through `q05_multi_engine_osint.json` — raw outputs of
   the five pre-registered queries (N = 5)
 - `q06_protocol_demo.json` / `q06_protocol_demo.py` — post-hoc demonstration
-  of the §5.1 sanity protocol running against the Q1 Ahmia silent failure;
-  dispatcher reports `ok=true`, both sentinels fail, the protocol catches
-  what the dispatcher missed
+  of the §5.1 sanity protocol running against the Q1 Ahmia silent failure
+  through the OnionClaw dispatcher; dispatcher reports `ok=true`, both
+  sentinels fail, the protocol catches what the dispatcher missed
+- `q07_direct_probe.json` / `q07_direct_probe.py` — independent-parser
+  cross-validation of the same protocol, with no OnionClaw code on the call
+  path (direct `requests[socks]` + BeautifulSoup against Ahmia's documented
+  result selector); same verdict, supporting the protocol's dispatcher-agnostic
+  design claim
 - `_run.log` — combined run log
 - `audit_summary.md` — pre-install source audit of the OnionClaw dispatcher
 - `legacy_check.py` / `legacy_check.txt` / `legacy_check.json` — replication
