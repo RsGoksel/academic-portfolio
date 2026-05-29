@@ -9,10 +9,12 @@ in darknet IR: pair every `_search` call with a `_fetch` of the same
 engine's SERP URL, and diff the parser output against the fetched HTML
 for a known sentinel string. The protocol is motivated and exercised by
 a pre-registered single-snapshot audit of eighteen Tor-network search
-engines (q00–q05), and demonstrated against an Ahmia silent failure in
-a post-hoc protocol-demonstration probe (q06). The audit was reached
-through a freshly bootstrapped Tor Expert Bundle on 2026-05-28. The
-paper is deliberately not a benchmark in any IR sense.
+engines (q00–q05), demonstrated against an Ahmia silent failure in
+a post-hoc protocol-demonstration probe (q06), cross-validated by an
+independent-parser probe with no OnionClaw on the call path (q07), and
+its root cause identified by a session-aware diagnostic probe (q08).
+The audit was reached through a freshly bootstrapped Tor Expert Bundle on
+2026-05-28. The paper is deliberately not a benchmark in any IR sense.
 
 ## What is in this directory
 
@@ -47,8 +49,15 @@ ResearchGate publication.
 - `q07_direct_probe.json` / `q07_direct_probe.py` — independent-parser
   cross-validation of the same protocol, with no OnionClaw code on the call
   path (direct `requests[socks]` + BeautifulSoup against Ahmia's documented
-  result selector); same verdict, supporting the protocol's dispatcher-agnostic
-  design claim
+  result selector); same verdict, ruling out an OnionClaw-specific reading of
+  the silent failure
+- `q08_session_aware_probe.json` / `q08_session_aware_probe.py` — session-aware
+  diagnostic probe that honours Ahmia's actual form contract (harvest the
+  per-session hidden token from the homepage, then issue the search with that
+  token alongside the query). Returns a real SERP of 2.6 MB with 2,931
+  `li.result` entries — establishes that the engine is server-rendering
+  results and identifies the silent-failure root cause as a session-contract
+  gap that stateless probes (OnionClaw or otherwise) fail to honour
 - `_run.log` — combined run log
 - `audit_summary.md` — pre-install source audit of the OnionClaw dispatcher
 - `legacy_check.py` / `legacy_check.txt` / `legacy_check.json` — replication

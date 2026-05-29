@@ -1,0 +1,70 @@
+{
+  "probe_run_utc": "2026-05-29T20:02:12.707019+00:00",
+  "query": "machine learning",
+  "engine": "Ahmia",
+  "method": "Two-step: (1) GET homepage and harvest the per-session hidden form token, (2) issue the search GET with the query parameter and the harvested token.",
+  "base_url": "https://ahmia.fi",
+  "homepage_status": 200,
+  "homepage_len": 4727,
+  "form_action": "/search/",
+  "form_http_method": "get",
+  "harvested_hidden_inputs": [
+    {
+      "name": "33ab23",
+      "value": "b8f425"
+    }
+  ],
+  "search_status": 200,
+  "search_final_url": "https://ahmia.fi/search/?q=machine+learning&33ab23=b8f425",
+  "search_response_len": 2603856,
+  "raw_li_result_count": 2931,
+  "query_echo_count_in_html": 2942,
+  "onion_href_count_in_html": 0,
+  "first_10_result_entries": [
+    {
+      "href": "/search/redirect?search_term=machine learning&redirect_url=http://hacker5cvt32oue2ex3scogrtdf5itblxqaioc6hl3fov63e4mswcqad.onion/product-tag/carding-machine-learning/",
+      "title": "carding machine learning Archives - Hacker Shop Best Darkweb Market"
+    },
+    {
+      "href": "/search/redirect?search_term=machine learning&redirect_url=http://zmgifpskfc3zy6boycznaz7w3otiwdjeji4m7lwpcpsagywafhnqxzad.onion/blog/toblerone/",
+      "title": "what tbblobnoern can tell us about machine learning"
+    },
+    {
+      "href": "/search/redirect?search_term=machine learning&redirect_url=http://zmgifpsk2eogzijzr4xsrimf4ac7zsvqo6ao3d4fsuyubeoo2efwe6ad.onion/blog/toblerone/",
+      "title": "what tbblobnoern can tell us about machine learning"
+    },
+    {
+      "href": "/search/redirect?search_term=machine learning&redirect_url=http://rainchn44xkddugci5xaczrm6qxav5ebhidwook3j3oywus6mqaomwyd.onion/player.php?loop=1&amp;t=chinese+learning+english.mp4&amp;v=%2Fr%2Fsrc%2F1762902585554-0.mp4",
+      "title": "chinese learning english.mp4"
+    },
+    {
+      "href": "/search/redirect?search_term=machine learning&redirect_url=http://k2htee64gyxc4zm7ssrd57zz4t5rbm2rhu4cdpfhdh7y4bkmmft7idad.onion/howto/new-machine/",
+      "title": "new-machine"
+    },
+    {
+      "href": "/search/redirect?search_term=machine learning&redirect_url=http://g2h4nn5u2rqo2zwwdfdv53kjasn6xionvd4wdd7kgkku4hxkpqhqcbyd.onion/",
+      "title": "Cash Machine"
+    },
+    {
+      "href": "/search/redirect?search_term=machine learning&redirect_url=https://y7yea4pmqqtznb33qiugvysyn2bob5v62e4pvoadoibrwkq3tsddjeyd.onion/module-categories/further-learning",
+      "title": "Further Learning | Surveillance Self-Defense"
+    },
+    {
+      "href": "/search/redirect?search_term=machine learning&redirect_url=http://shadowmpqfj37rd3zlaakurssypadpyh52siaeqkt5vmi423xuj4xgid.onion/training/vip/index.html",
+      "title": "Shadow Hacker Learning Management System"
+    },
+    {
+      "href": "/search/redirect?search_term=machine learning&redirect_url=http://jentyxddh2rf47gd3e43kuebyn2xsv6h72gzh46oe4rxyovvm7xe5ead.onion/src/learning_perl_exercises/",
+      "title": "Log - learning_perl_exercises - Learning Perl exercises"
+    },
+    {
+      "href": "/search/redirect?search_term=machine learning&redirect_url=http://anonymousbjacppmorbami3c535gtdjcsrjzqogf42gcmdrzldcerdid.onion/training/vip/",
+      "title": "Anonymous Hackers Learning Management System"
+    }
+  ],
+  "verdict": {
+    "engine_returns_server_rendered_results": true,
+    "silent_failure_in_q7_was_due_to": "missing per-session hidden form token in stateless probe URL construction (anti-scraping mechanism), not a JS-only engine architecture",
+    "reasoning": "Stateless probes against /search/?q=... receive a 302 redirect to /. With the homepage form token included as a request parameter, the search endpoint returns 2603856 bytes of HTML containing 2931 <li class='result'> elements and 2942 echoes of the query string. The engine itself is server-rendering results; the silent failure caught by the protocol in Q6 and Q7 is the consequence of two independent stateless parsers sharing the same blind spot about Ahmia's per-session form contract."
+  }
+}
