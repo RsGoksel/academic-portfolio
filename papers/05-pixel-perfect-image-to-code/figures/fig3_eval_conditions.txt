@@ -1,0 +1,26 @@
+Figure 3. Pre-registered experimental conditions for the proposed benchmark.
+Columns mark whether each condition is evaluated on a metric.
+
++-----+---------------------------------------------------+------+------+-------+-------+------+-------+
+| ID  | Condition                                         | SSIM | MSE  | DOM   | Human | Cost | Wall  |
+|     |                                                   |      |      | edit  | pref. | $    | clock |
++-----+---------------------------------------------------+------+------+-------+-------+------+-------+
+| C1  | Single-shot Claude Opus 4.7 (baseline)            |  Y   |  Y   |   Y   |   Y   |  Y   |   Y   |
+| C2  | Single-shot v0 (commercial)                       |  Y   |  Y   |   Y   |   Y   |  Y   |   Y   |
+| C3  | Single-shot Kombai (commercial)                   |  Y   |  Y   |   Y   |   Y   |  Y   |   Y   |
+| C4  | Iterative Opus + Playwright + pixelmatch (3 iter) |  Y   |  Y   |   Y   |   Y   |  Y   |   Y   |
+| C5  | Iterative Opus + Playwright + pixelmatch (5 iter) |  Y   |  Y   |   Y   |   Y   |  Y   |   Y   |
+| C6  | Iterative Opus + RenderLens MCP critic (5 iter)   |  Y   |  Y   |   Y   |   Y   |  Y   |   Y   |
+| C7  | UI2Code^N-9B single-shot (open weights)           |  Y   |  Y   |   Y   |   Y   |  Y   |   Y   |
+| C8  | UI2Code^N-9B iterative (5 iter)                   |  Y   |  Y   |   Y   |   Y   |  Y   |   Y   |
++-----+---------------------------------------------------+------+------+-------+-------+------+-------+
+
+C1, C2, C3, C7 = single-shot reference conditions.
+C4, C5, C6, C8 = iterative conditions hypothesised to beat their single-shot peers.
+
+Primary statistical comparisons (pre-registered):
+  H1: C5 beats C1 on human preference         (paired binomial, alpha = 0.05)
+  H2: C6 beats C5 on SSIM                     (paired t-test on per-page SSIM)
+  H3: C8 beats C7 on UI-polish human preference
+  H4: C8 is the lowest cost-per-quality-unit among C4-C6 and C8
+  H5: Iteration depth has diminishing returns; C5 - C4 < C4 - C1 on SSIM

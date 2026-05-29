@@ -1,0 +1,16 @@
+flowchart LR
+    A[Ransomware.live<br/>academic mirror<br/>2020-2025 JSON snapshots] --> B[Ethics gate<br/>DPA + IRB clearance<br/>raw text never republished]
+    B --> C[Preprocessing<br/>HTML strip, language detect,<br/>de-duplication, hash index]
+    C --> D[Prompt assembly<br/>JSON Schema + few-shot<br/>3-5 industry examples]
+    D --> E[Primary classifier<br/>Claude Sonnet 4.6]
+    D --> F[Secondary classifier<br/>Claude Opus 4.7<br/>or GPT-5 head-to-head]
+    D --> G[Open baseline<br/>Llama-3.3-70B]
+    E --> H{Two-pass<br/>agreement?}
+    F --> H
+    H -- agreement --> I[Auto-accept]
+    H -- disagreement --> J[Human review queue<br/>2 annotators, kappa target >= 0.7]
+    G --> K[Open-source ceiling<br/>reported separately]
+    I --> L[Structured dataset<br/>JSON-per-post]
+    J --> L
+    L --> M[Aggregate analytics<br/>industry/group/time slices]
+    L --> N[Reusable artifacts<br/>annotation tool +<br/>prompt templates released]

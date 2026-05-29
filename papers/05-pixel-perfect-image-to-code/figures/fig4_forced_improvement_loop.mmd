@@ -1,0 +1,28 @@
+sequenceDiagram
+    participant Orch as Orchestrator
+    participant Gen as Generator VLM
+    participant Render as Playwright renderer
+    participant Diff as Pixel-diff engine
+    participant Critic as Critic VLM
+    participant State as Best-so-far state
+
+    Orch->>State: get best_code, best_score
+    Orch->>Critic: target, rendered_best, diff_heatmap
+    Critic-->>Orch: patch_proposal (one minimal delta)
+    Orch->>Gen: apply patch to best_code
+    Gen-->>Orch: candidate_code
+    Orch->>Render: render(candidate_code)
+    Render-->>Orch: candidate_png
+    Orch->>Diff: diff(target_png, candidate_png)
+    Diff-->>Orch: candidate_score, candidate_heatmap
+
+    alt candidate_score > best_score
+        Orch->>State: write candidate as new best
+        Note over State: Accept: monotone improvement
+    else candidate_score <= best_score
+        Note over Orch: Reject patch
+        Orch->>Orch: resample (up to k attempts)
+        alt k attempts exhausted
+            Orch->>Orch: terminate iteration
+        end
+    end

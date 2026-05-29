@@ -1,0 +1,16 @@
+%% Figure 3. Taxonomy of search-engine failure modes observed during this
+%% study. Loud failures are surfaced by the dispatcher (status=down, ok=false).
+%% Silent failures complete with status=up and ok=true but return zero
+%% information value to the researcher. The Ahmia parser regression observed
+%% in Q1/Q2 falls in the rightmost branch.
+flowchart TD
+    Q[Issue sicry_search query] --> R{Engine TCP-reachable<br/>via Tor circuit?}
+    R -->|no| L1[LOUD FAIL<br/>status=down<br/>engine unreachable<br/>via Tor circuit]
+    R -->|yes| S{Engine returned<br/>HTTP 200 + body?}
+    S -->|no| L2[LOUD FAIL<br/>5xx, 4xx, timeout<br/>logged with code]
+    S -->|yes| T{Parser matched<br/>result selectors?}
+    T -->|yes, results parsed| OK[SUCCESS<br/>result_count greater than 0<br/>per-result confidence sane]
+    T -->|yes, zero hits returned| Z[LEGITIMATE EMPTY<br/>result_count = 0<br/>engine knows answer is none]
+    T -->|no, parser fell through| L3[SILENT FAIL<br/>status=up, ok=true<br/>scraped page chrome<br/>confidence ~ 0.05<br/>generic boilerplate]
+    L3 --> M[Downstream researcher<br/>assumes engine has<br/>no hits for query]
+    M --> N[Recall measurement<br/>contaminated]

@@ -1,0 +1,23 @@
+{
+  "ok": true,
+  "elapsed_sec": 1.53,
+  "result": {
+    "url": "https://duckduckgogg42xjoc72x3sjasowoarfbgcmvfimaftt6twagswzczad.onion/",
+    "is_onion": true,
+    "status": 200,
+    "title": "DuckDuckGo - Protection. Privacy. Peace of mind.",
+    "text": "DuckDuckGo - Protection. Privacy. Peace of mind.\nDuck.ai\nMain navigation menu closed\nMenu\nDuckDuckGo\nDuckDuckGo\nSearch\nDuck.ai\n0\n / \n500\nProtection. Privacy. Peace of mind.",
+    "links": [
+      {
+        "text": "Duck.ai",
+        "href": "https://duck.ai"
+      },
+      {
+        "text": "Protection. Privacy. Peace of mind.",
+        "href": "https://duckduckgogg42xjoc72x3sjasowoarfbgcmvfimaftt6twagswzczad.onion/compare-privacy"
+      }
+    ],
+    "truncated": false,
+    "error": null
+  }
+}

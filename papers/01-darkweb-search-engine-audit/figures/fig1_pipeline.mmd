@@ -1,0 +1,18 @@
+%% Figure 1. End-to-end measurement pipeline used in this study.
+%% A single Tor circuit set bootstraps once, then drives all five queries
+%% through the OnionClaw dispatcher. Raw outputs are persisted as JSON.
+flowchart TD
+    A[Tor Expert Bundle<br/>v0.4.9.8] -->|torrc + DataDirectory<br/>SocksPort 9050| B[Tor bootstrap<br/>~45 s to 100 percent]
+    B --> C{Exit-IP check<br/>check.torproject.org}
+    C -->|IsTor=true| D[OnionClaw v2.3.0<br/>dispatcher]
+    C -->|fail| Z[Abort run]
+    D --> E[Q0 sicry_check_engines<br/>probe 18 engines]
+    D --> F[Q1, Q2 sicry_search<br/>Ahmia and Ahmia-clearnet]
+    D --> G[Q3, Q4 sicry_fetch<br/>direct hidden-service HTML]
+    D --> H[Q5 sicry_search<br/>multi-engine OSINT]
+    E --> I[Per-engine status<br/>and latency JSON]
+    F --> I
+    G --> I
+    H --> I
+    I --> J[Raw artefacts<br/>test_results/*.json + _run.log]
+    J --> K[Post-hoc analysis<br/>liveness, latency, parser checks]

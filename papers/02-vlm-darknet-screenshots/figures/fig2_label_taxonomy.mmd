@@ -1,0 +1,23 @@
+%% Figure 2. Ten-class label taxonomy with visual-gestalt cues.
+flowchart TB
+    R[Tor hidden-service<br/>landing page] --> CL{classify}
+
+    CL --> F[Forum<br/><i>thread list, usernames,<br/>post counts</i>]
+    CL --> M[Marketplace<br/><i>product grid, BTC/XMR prices,<br/>vendor names</i>]
+    CL --> B[Blog<br/><i>long-form article,<br/>byline + date</i>]
+    CL --> E[EmptyOrError<br/><i>blank, default welcome,<br/>placeholder</i>]
+    CL --> P[Parked<br/><i>holding screen with<br/>contact / under construction</i>]
+    CL --> L[LeakSite<br/><i>victim list, ransomware<br/>branding, dump links</i>]
+    CL --> I[ImageboardOrChan<br/><i>anonymous post grid,<br/>dense thumbnails</i>]
+    CL --> S[ServiceLanding<br/><i>single-page service control<br/>email / wallet / chat</i>]
+    CL --> X[MirrorOrIndex<br/><i>Hidden-Wiki-style list<br/>of .onion links</i>]
+    CL --> O[Other<br/><i>none of the above;<br/>describe in note</i>]
+
+    classDef failure fill:#fdd,stroke:#a55;
+    classDef content fill:#dfd,stroke:#5a5;
+    classDef service fill:#ddf,stroke:#55a;
+    classDef catchall fill:#eee,stroke:#888;
+    class E,P failure
+    class F,M,B,L,I content
+    class S,X service
+    class O catchall

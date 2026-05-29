@@ -1,0 +1,34 @@
+{
+  "ok": true,
+  "elapsed_sec": 1.25,
+  "result": [
+    {
+      "title": "Tor browser bundle",
+      "url": "https://www.torproject.org/projects/torbrowser.html",
+      "engine": "Ahmia-clearnet",
+      "confidence": 0.05,
+      "score": 0.05
+    },
+    {
+      "title": "contribute to the source code",
+      "url": "https://github.com/ahmia/ahmia-site",
+      "engine": "Ahmia-clearnet",
+      "confidence": 0.05,
+      "score": 0.05
+    },
+    {
+      "title": "The Tor Project",
+      "url": "https://www.torproject.org",
+      "engine": "Ahmia-clearnet",
+      "confidence": 0.05,
+      "score": 0.05
+    },
+    {
+      "title": "juhanurmihxlp77nkq76byazcldy2hlmovfu2epvl5ankdibsot4csyd.onion",
+      "url": "http://juhanurmihxlp77nkq76byazcldy2hlmovfu2epvl5ankdibsot4csyd.onion",
+      "engine": "Ahmia-clearnet",
+      "confidence": 0.05,
+      "score": 0.05
+    }
+  ]
+}

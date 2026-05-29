@@ -1,0 +1,24 @@
+%% Figure 4. Recommended circuit-isolation hygiene for darknet IR
+%% benchmarks. The single-circuit baseline (left, used in this study)
+%% privileges within-run comparability of latency. The rotated-circuit
+%% variant (right) is recommended for replications that must defeat
+%% engine-side rate-limiting and exit-IP fingerprinting.
+flowchart LR
+    subgraph A[Single-circuit run, used in this study]
+        direction TB
+        A1[Bootstrap once] --> A2[Q0 probe all engines]
+        A2 --> A3[Q1 ... Q5 share<br/>same circuit set]
+        A3 --> A4[Persist Q0...Q5 outputs]
+    end
+    subgraph B[Rotated-circuit run, recommended for replications]
+        direction TB
+        B1[Bootstrap once] --> B2[Q0 probe all engines<br/>baseline circuit set]
+        B2 --> B3[sicry_renew_identity]
+        B3 --> B4[Q1 new circuit set]
+        B4 --> B5[sicry_renew_identity]
+        B5 --> B6[Q2 new circuit set]
+        B6 --> B7[... continue per query ...]
+        B7 --> B8[Persist Q0...Qn outputs<br/>with per-query exit IP]
+    end
+    A -.-> N1[Pro: comparable latencies<br/>across engines<br/>Con: shared exit fingerprint<br/>may trigger rate limiting]
+    B -.-> N2[Pro: each query gets<br/>fresh exit identity<br/>Con: latency variance<br/>across queries]

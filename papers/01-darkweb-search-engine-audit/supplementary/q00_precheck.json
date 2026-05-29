@@ -1,0 +1,139 @@
+{
+  "ok": true,
+  "elapsed_sec": 48.4,
+  "result": {
+    "tor": {
+      "tor_active": true,
+      "exit_ip": "45.84.107.76",
+      "error": null
+    },
+    "engines": [
+      {
+        "name": "Ahmia",
+        "status": "up",
+        "latency_ms": 4008,
+        "reliability": 0.667,
+        "error": null
+      },
+      {
+        "name": "OnionLand",
+        "status": "up",
+        "latency_ms": 5303,
+        "reliability": 0.667,
+        "error": null
+      },
+      {
+        "name": "Amnesia",
+        "status": "up",
+        "latency_ms": 4060,
+        "reliability": 0.667,
+        "error": null
+      },
+      {
+        "name": "Torland",
+        "status": "up",
+        "latency_ms": 5710,
+        "reliability": 0.667,
+        "error": null
+      },
+      {
+        "name": "Excavator",
+        "status": "up",
+        "latency_ms": 4937,
+        "reliability": 0.667,
+        "error": null
+      },
+      {
+        "name": "Onionway",
+        "status": "up",
+        "latency_ms": 4879,
+        "reliability": 0.667,
+        "error": null
+      },
+      {
+        "name": "Tor66",
+        "status": "up",
+        "latency_ms": 4723,
+        "reliability": 0.667,
+        "error": null
+      },
+      {
+        "name": "OSS",
+        "status": "up",
+        "latency_ms": 5006,
+        "reliability": 0.667,
+        "error": null
+      },
+      {
+        "name": "Torgol",
+        "status": "up",
+        "latency_ms": 3006,
+        "reliability": 0.667,
+        "error": null
+      },
+      {
+        "name": "TheDeepSearches",
+        "status": "up",
+        "latency_ms": 6307,
+        "reliability": 0.667,
+        "error": null
+      },
+      {
+        "name": "Kaizer",
+        "status": "down",
+        "latency_ms": null,
+        "reliability": 0.333,
+        "error": "engine unreachable via Tor circuit"
+      },
+      {
+        "name": "Anima",
+        "status": "down",
+        "latency_ms": null,
+        "reliability": 0.333,
+        "error": "engine unreachable via Tor circuit"
+      },
+      {
+        "name": "Tornado",
+        "status": "down",
+        "latency_ms": null,
+        "reliability": 0.333,
+        "error": "engine unreachable via Tor circuit"
+      },
+      {
+        "name": "TorNet",
+        "status": "down",
+        "latency_ms": null,
+        "reliability": 0.333,
+        "error": "engine unreachable via Tor circuit"
+      },
+      {
+        "name": "FindTor",
+        "status": "up",
+        "latency_ms": 4382,
+        "reliability": 0.667,
+        "error": null
+      },
+      {
+        "name": "Torgle",
+        "status": "down",
+        "latency_ms": null,
+        "reliability": 0.333,
+        "error": "engine unreachable via Tor circuit"
+      },
+      {
+        "name": "DuckDuckGo-Tor",
+        "status": "up",
+        "latency_ms": 4213,
+        "reliability": 0.667,
+        "error": null
+      },
+      {
+        "name": "Ahmia-clearnet",
+        "status": "up",
+        "latency_ms": 1315,
+        "reliability": 0.667,
+        "error": null
+      }
+    ]
+  }
+}

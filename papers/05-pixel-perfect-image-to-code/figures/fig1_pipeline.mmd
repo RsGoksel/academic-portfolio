@@ -1,0 +1,15 @@
+flowchart TD
+    A[Reference image<br/>PNG or JPG or Figma URL] --> B{Source type?}
+    B -->|Figma URL| C1[Ingest: Figma Dev Mode<br/>tokens + layout JSON]
+    B -->|Raw image| C2[Ingest: tiled screenshot<br/>plus reference-URL token extractor]
+    C1 --> D[First-draft generator<br/>v0 OR 21st.dev magic OR direct VLM<br/>constrained by shadcn design system]
+    C2 --> D
+    D --> E[Render stage<br/>Playwright headless Chromium<br/>fixed viewport, fonts preloaded, animations off]
+    E --> F[Verify stage<br/>pixelmatch + SSIM = numeric score<br/>diff heatmap = visual signal]
+    F --> G[Critique and patch stage<br/>frontier VLM reads target, rendered, diff<br/>emits minimal CSS or HTML patch]
+    G --> H{Score strictly<br/>better than<br/>best so far?}
+    H -->|No| I[Reject patch<br/>resample up to k attempts]
+    I --> G
+    H -->|Yes| J{Iteration cap<br/>reached or score<br/>at threshold?}
+    J -->|No| E
+    J -->|Yes| K[Output<br/>code + diff report]

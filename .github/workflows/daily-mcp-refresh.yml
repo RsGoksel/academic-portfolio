@@ -1,0 +1,92 @@
+name: Daily MCP registry refresh
+
+on:
+  schedule:
+    # 04:00 UTC every day -- 07:00 Istanbul (winter) / 06:00 (summer)
+    - cron: "0 4 * * *"
+  workflow_dispatch:
+    inputs:
+      reason:
+        description: "Reason for manual run"
+        required: false
+        default: "manual refresh"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: mcp-refresh
+  cancel-in-progress: false
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+
+      - name: Cache pip
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/pip
+          key: pip-mcp-${{ runner.os }}-${{ hashFiles('mcp-scrape/requirements.txt') }}
+          restore-keys: |
+            pip-mcp-${{ runner.os }}-
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r mcp-scrape/requirements.txt
+
+      - name: Run incremental refresh
+        id: refresh
+        run: |
+          cd mcp-scrape
+          python incremental_update.py | tee /tmp/refresh.log
+
+      - name: Stage changes
+        id: stage
+        run: |
+          git add mcp-scrape/data/
+          if git diff --cached --quiet; then
+            echo "has_changes=false" >> "$GITHUB_OUTPUT"
+            echo "No new data this run."
+          else
+            echo "has_changes=true" >> "$GITHUB_OUTPUT"
+            # Pull a tight summary line for the commit body
+            today=$(date -u +%Y-%m-%d)
+            if [ -f "mcp-scrape/data/changes/${today}.md" ]; then
+              echo "summary<<EOF" >> "$GITHUB_OUTPUT"
+              head -12 "mcp-scrape/data/changes/${today}.md" >> "$GITHUB_OUTPUT"
+              echo "EOF" >> "$GITHUB_OUTPUT"
+            fi
+          fi
+
+      - name: Commit and push
+        if: steps.stage.outputs.has_changes == 'true'
+        env:
+          GIT_AUTHOR_NAME: "rg-bildiri MCP refresh bot"
+          GIT_AUTHOR_EMAIL: "actions@users.noreply.github.com"
+          GIT_COMMITTER_NAME: "rg-bildiri MCP refresh bot"
+          GIT_COMMITTER_EMAIL: "actions@users.noreply.github.com"
+        run: |
+          today=$(date -u +%Y-%m-%d)
+          git commit -m "chore(mcp-scrape): daily refresh ${today}" \
+                     -m "${{ steps.stage.outputs.summary }}"
+          git push
+
+      - name: Upload daily report as artifact
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: mcp-refresh-log-${{ github.run_id }}
+          path: |
+            /tmp/refresh.log
+            mcp-scrape/data/changes/
+          retention-days: 30

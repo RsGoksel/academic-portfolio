@@ -1,0 +1,9 @@
+SocksPort 127.0.0.1:9050
+ControlPort 127.0.0.1:9051
+CookieAuthentication 1
+DataDirectory C:\tmp\darkweb-audit\tor\data
+Log notice file C:\tmp\darkweb-audit\tor\tor.log
+AvoidDiskWrites 0
+ClientOnly 1
+GeoIPFile C:\tmp\darkweb-audit\tor\geoip\geoip
+GeoIPv6File C:\tmp\darkweb-audit\tor\geoip\geoip6

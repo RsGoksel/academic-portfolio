@@ -1,0 +1,27 @@
+%% Figure 3. Evaluation flow from corpus sampling to metric reporting.
+sequenceDiagram
+    autonumber
+    participant Q as 30 OSINT queries<br/>(SecurityOnion / MISP)
+    participant SF as sicry_fetch<br/>multi-engine pass
+    participant SL as Seed-list filter<br/>(CSAM/weapons exclude)
+    participant CAP as Tor-aware capture<br/>(Playwright + SOCKS5)
+    participant A1 as Annotator 1
+    participant A2 as Annotator 2
+    participant ADJ as Adjudicator
+    participant MD as Models<br/>(Opus 4.7, GPT-5, UI2Code^N-9B)
+    participant R as Reporting
+
+    Q->>SF: queries
+    SF->>SL: candidate .onion URLs
+    SL->>CAP: 500 filtered URLs
+    CAP->>A1: 500 screenshots (blinded, image-only)
+    CAP->>A2: 500 screenshots (blinded, image-only)
+    A1->>ADJ: per-URL label
+    A2->>ADJ: per-URL label
+    ADJ->>ADJ: compute Cohen's kappa
+    Note over ADJ: gate: kappa >= 0.75<br/>else revise taxonomy
+    ADJ->>R: ground-truth labels<br/>(adjudicated)
+    CAP->>MD: 500 screenshots
+    MD->>R: per-URL label + confidence + note<br/>(per model)
+    R->>R: per-class P/R, weighted F1,<br/>confusion matrix, cost/1k URLs
+    R->>R: failure analysis<br/>(every conf>=0.9 disagreement)

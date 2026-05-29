@@ -1,0 +1,46 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+build/
+dist/
+.pytest_cache/
+.mypy_cache/
+
+# venvs
+venv/
+.venv/
+env/
+
+# Editors
+.vscode/
+.idea/
+*.swp
+*~
+.DS_Store
+
+# Pandoc / LaTeX intermediate artefacts
+*.aux
+*.log
+*.out
+*.fls
+*.fdb_latexmk
+*.synctex.gz
+PAPER_RENDER.md
+
+# Local PAPER source/PDF (canonical copies live on ResearchGate)
+papers/*/PAPER.md
+papers/*/PAPER.pdf
+papers/*/INDEX.md
+
+# Large data / temp
+*.tar.gz
+*.zip.tmp
+
+# Third-party PDFs downloaded as prior art -- not redistributed
+papers/*/references/*.pdf
+
+# Drafts / scratch
+SCRATCH/
+TODO.md

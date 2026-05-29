@@ -1,0 +1,22 @@
+%% Figure 1: Anatomy of the impersonator-by-copy attack.
+%% Render with: mmdc -i fig1_attack_anatomy.mmd -o fig1_attack_anatomy.png
+flowchart TD
+    A["Legitimate upstream repo<br/>Account-B/OnionClaw<br/>created 2026-03-14"]:::clean
+    A -->|"verbatim git clone<br/>(history preserved,<br/>author identity preserved)"| B["Impersonator repo<br/>Account-A/OnionClaw<br/>created 2026-03-28"]:::malicious
+
+    B -->|"single commit 2b0e666<br/>message claims Python bug fix"| C["Add binary file:<br/>.github/ISSUE_TEMPLATE/<br/>Claw_Onion_1.9.zip<br/>(580808 bytes)"]:::malicious
+
+    C --> D["ZIP contents:<br/>Launcher.cmd (26 B)<br/>lua51.exe (~872 KB)<br/>rest.txt (~300 KB, obfuscated)"]:::malicious
+
+    E["Victim developer<br/>browses repo on github.com,<br/>clones to disk"]:::victim
+    E -->|"finds unfamiliar ZIP<br/>under .github/"| F["Manual extract<br/>+ double-click Launcher.cmd"]:::victim
+    F -->|"start lua51.exe rest.txt"| G["Obfuscated payload executes<br/>(behavior not characterized<br/>in this study)"]:::malicious
+
+    H["Defenses bypassed:<br/>- dependency scanners<br/>- typosquat detectors<br/>- post-install auditors<br/>- static malicious-feature scanners<br/>- GitHub platform signals"]:::bypassed
+
+    B -.->|"all defenses<br/>see clean signal"| H
+
+    classDef clean fill:#d4edda,stroke:#155724,color:#000
+    classDef malicious fill:#f8d7da,stroke:#721c24,color:#000
+    classDef victim fill:#fff3cd,stroke:#856404,color:#000
+    classDef bypassed fill:#e2e3e5,stroke:#383d41,color:#000

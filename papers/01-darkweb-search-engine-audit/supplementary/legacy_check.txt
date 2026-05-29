@@ -1,0 +1,76 @@
+LEGACY ENGINE LIVENESS PROBE — Faizan & Khan (2019) inventory
+============================================================
+
+Probe date (UTC):   2026-05-28T13:03:22
+Tor SOCKS proxy:    127.0.0.1:9050  (Tor Expert Bundle 0.4.9.8, Windows x86_64)
+Tor exit (this run): 109.70.100.2
+Method:             Python 3.13.7 + requests==2.34.2 over socks5h://;
+                    GET / on each canonical engine landing page;
+                    timeout 90 s; allow_redirects=True.
+
+Reference:          Faizan, M., Khan, R. A. (2019). "Two-stage approach for indexing
+                    the dark web onion services." Journal of King Saud University —
+                    Computer and Information Sciences.
+
+The engine inventory that Faizan & Khan (2019) reported as their evaluation set is
+reproduced below in their original ordering. URLs were taken from the most widely
+cited public registries of that era (the Hidden Wiki and Daniel's Onion Index,
+both archived). Where the engine's canonical address was published only in v2
+short-format (16 base-32 characters), the v2 form is recorded; v2 hidden services
+were deprecated in Tor 0.4.6 and are not resolvable by any current Tor client.
+
+Result
+------
+
+  [1] Ahmia                                                              UP   (200, 3.44 s)
+        title: "Ahmia &mdash; Search Tor Hidden Services"
+  [2] Torch                                                              DOWN (connect-refused)
+        the v3 address torchpoaolafho6ycwo7lzfg7p7okjbplowxhqixyhguvifmplnybnyd.onion
+        responds at the rendezvous layer but the service refuses HTTP
+        connections; the engine has been offline for the duration of this
+        probe.
+  [3] NotEvil (alias "not Evil")                                         DOWN (v2 address)
+        canonical address hss3uro2hsxfogfq.onion is a v2 short-format hidden
+        service. v2 was deprecated in Tor 0.4.6 (October 2021) and is no
+        longer resolvable by current Tor clients.
+  [4] Candle                                                             DOWN (v2 address)
+        canonical address gjobqjj7wyczbqie.onion is a v2 short-format hidden
+        service. Same status as [3].
+  [5] Haystak                                                            DOWN (timeout)
+        v3 address haystak5njsmn2hqkewecpaxetahtwhsbsa64jom2k22z5afxhnpxfid.onion
+        responds at the descriptor layer but neither the HTTP nor the HTTPS
+        endpoint completes a TCP handshake within 90 s.
+  [6] OnionLand Search                                                   UP   (200, 2.06 s)
+        title: "OnionLand Search"
+
+Summary
+-------
+
+  Resolved at HTTP layer:      2 / 6   (Ahmia, OnionLand Search)
+  Down (refuses HTTP):         1 / 6   (Torch)
+  Down (v2-format, retired):   2 / 6   (NotEvil, Candle)
+  Down (timeout, presumed off):1 / 6   (Haystak)
+
+  Net resolvable rate:         2 / 6   =  33%
+
+This figure is the empirical basis for the statement in §1 of the accompanying
+manuscript that, of the six engines evaluated by Faizan and Khan (2019), only
+two still resolve through a current Tor client. Replication: run the script in
+this bundle (`legacy_check.py`, copy of the in-paper probe script) against a
+fresh Tor circuit. Date-dependent results are expected; engine churn is the
+phenomenon under measurement.
+
+Notes
+-----
+
+* "Resolves" here means HTTP-200 within the timeout. A descriptor that loads
+  but whose service refuses HTTP (Torch, Haystak) is operationally equivalent
+  to an offline engine for a downstream researcher who wants to fetch SERPs.
+
+* The status of Torch is genuinely ambiguous at the time of probe; it has
+  alternated between operational and offline several times in 2024–2025
+  according to public Twitter notices from its purported maintainers.
+
+* This probe is the minimal reproducibility evidence for the §1 claim. It is
+  not a full historical audit of the dark-web search-engine population and
+  should not be treated as one.
