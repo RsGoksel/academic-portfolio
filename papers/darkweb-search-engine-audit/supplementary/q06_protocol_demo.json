@@ -1,0 +1,60 @@
+{
+  "protocol_run_utc": "2026-05-29T14:32:19.886368+00:00",
+  "query": "machine learning",
+  "engine": "Ahmia",
+  "serp_url": "http://juhanurmihxlp77nkq76byazcldy2hlmovfu2epvl5ankdibsot4csyd.onion/search/?q=machine+learning",
+  "dispatcher_search_result": [
+    {
+      "title": "Tor browser bundle",
+      "url": "https://www.torproject.org/projects/torbrowser.html",
+      "engine": "Ahmia",
+      "confidence": 0.05,
+      "score": 0.05
+    },
+    {
+      "title": "contribute to the source code",
+      "url": "https://github.com/ahmia/ahmia-site",
+      "engine": "Ahmia",
+      "confidence": 0.05,
+      "score": 0.05
+    },
+    {
+      "title": "The Tor Project",
+      "url": "https://www.torproject.org",
+      "engine": "Ahmia",
+      "confidence": 0.05,
+      "score": 0.05
+    }
+  ],
+  "dispatcher_fetch_result": {
+    "url": "http://juhanurmihxlp77nkq76byazcldy2hlmovfu2epvl5ankdibsot4csyd.onion/",
+    "status": 200,
+    "title": "Ahmia —\n      Search Tor Hidden Services",
+    "text_len": 1156,
+    "links_count": 12,
+    "text_excerpt": "Ahmia —\n      Search Tor Hidden Services\n    \n  \n\n \n\n        Unfortunately we have not deployd non-JavaScript version of Ahmia yet.\n      \n\n                 About Ahmia\n            \n\nAdd Service\n            \n\nPrivacy Policy\n            \n\nTerms of Service\n            \n\nBlacklist\n            \n\nContact\n\nAhmia\n\n        \n          Ahmia searches hidden services on the Tor network. To access these\n          hidden services, you need the\n          \n\n            Tor browser bundle\n.\n          Abuse material is not allowed on Ahmia. See our\n          \nservice blacklist\n          \n\n          and report abuse material if you find it in the index. It will\n          be removed as soon as possible.\n        \n      \n\n        \n          For more about Ahmia, see\n          \ndocumentation information\n          \n,\n          \ncontribute to the source code\n.\n          \n \nThe Tor Project\n\n Onion service:\n          \njuhanurmihxlp77nkq76byazcldy2hlmovfu2epvl5ankdibsot4csyd.onion\n\n      A man-in-the-middle fake clone detected! \n\n      Warning! \n\n      Right onion address starts with juhanurmihxlp77 and ends with 4csyd.onion. \n\n      Find real address from ahmia.fi",
+    "fetched_html_len": 1156
+  },
+  "protocol_diff": {
+    "search_returned_titles": [
+      "Tor browser bundle",
+      "contribute to the source code",
+      "The Tor Project"
+    ],
+    "search_titles_containing_query": [],
+    "search_titles_found_in_fetched_html": [
+      "Tor browser bundle",
+      "contribute to the source code",
+      "The Tor Project"
+    ],
+    "query_string_present_in_fetched_html": false
+  },
+  "protocol_verdict": {
+    "dispatcher_reported_ok_true": true,
+    "sentinel_1_query_in_fetched_html": false,
+    "sentinel_2_query_in_returned_titles": false,
+    "protocol_passes": false,
+    "silent_failure_caught": true,
+    "reasoning": "The dispatcher reported ok=True for the search call and returned 3 titles. Sentinel 1 (query string 'machine learning' present in fetched SERP HTML): FAIL. Sentinel 2 (query string 'machine learning' present in at least one returned title): FAIL. Either sentinel failing is sufficient to flag a silent failure; here both fail, so the protocol catches what the dispatcher's ok=True missed. The dispatcher's returned titles are the same Ahmia site chrome regardless of query (cf. the identical four-row boilerplate documented for Q1 and Q2 in §4.3), which is exactly the symptom of the parser regression described in §5.1."
+  }
+}

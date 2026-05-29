@@ -1,14 +1,18 @@
 # darkweb-search-engine-audit
 
-**A Single-Snapshot Audit of 18 Tor Search Engines: Liveness, Latency, and Silent Failure Modes**
+**A Sanity Protocol for Silent Failures in Darknet Information Retrieval: Evidence from a Single-Snapshot Audit of 18 Tor Search Engines**
 
 > **ResearchGate publication:** _(link pending upload)_
 
-A single-snapshot, pre-registered audit of eighteen Tor-network search
-engines reached through a freshly bootstrapped Tor Expert Bundle on
-2026-05-28. The paper reports per-engine liveness, latency, and a silent
-parser-drift failure mode in the dispatcher's Ahmia handler. It is
-deliberately not a benchmark in any IR sense.
+The paper's central contribution is a sanity protocol for silent failures
+in darknet IR: pair every `_search` call with a `_fetch` of the same
+engine's SERP URL, and diff the parser output against the fetched HTML
+for a known sentinel string. The protocol is motivated and exercised by
+a pre-registered single-snapshot audit of eighteen Tor-network search
+engines (q00–q05), and demonstrated against an Ahmia silent failure in
+a post-hoc protocol-demonstration probe (q06). The audit was reached
+through a freshly bootstrapped Tor Expert Bundle on 2026-05-28. The
+paper is deliberately not a benchmark in any IR sense.
 
 ## What is in this directory
 
@@ -34,7 +38,12 @@ ResearchGate publication.
 - `T3_pip_freeze.txt` — exact pinned dependency manifest
 - `torrc` — the configuration file actually used
 - `onion_t4b.py` — the five-query catalogue script
-- `q00_precheck.json` through `q05_multi_engine_osint.json` — raw query outputs
+- `q00_precheck.json` through `q05_multi_engine_osint.json` — raw outputs of
+  the five pre-registered queries (N = 5)
+- `q06_protocol_demo.json` / `q06_protocol_demo.py` — post-hoc demonstration
+  of the §5.1 sanity protocol running against the Q1 Ahmia silent failure;
+  dispatcher reports `ok=true`, both sentinels fail, the protocol catches
+  what the dispatcher missed
 - `_run.log` — combined run log
 - `audit_summary.md` — pre-install source audit of the OnionClaw dispatcher
 - `legacy_check.py` / `legacy_check.txt` / `legacy_check.json` — replication

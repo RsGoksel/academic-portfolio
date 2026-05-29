@@ -2,8 +2,8 @@
 
 Code, figures, and supplementary materials for academic papers and articles.
 
-The papers themselves live on ResearchGate. This repository carries the working
-artefacts they reference: figure sources, probe scripts, raw data.
+The papers themselves live on arXiv or ResearchGate. This repository carries the
+working artefacts they reference: figure sources, probe scripts, raw data.
 
 ---
 
@@ -11,13 +11,13 @@ artefacts they reference: figure sources, probe scripts, raw data.
 
 | # | Folder | Link | Content | Category |
 |---|---|---|---|---|
-| 01 | [darkweb-search-engine-audit](papers/darkweb-search-engine-audit/) | _coming soon_ | A Single-Snapshot Audit of 18 Tor Search Engines — liveness, latency, and silent-failure taxonomy; reproducibility bundle included | Preprint / Technical report |
+| 01 | [darkweb-search-engine-audit](papers/darkweb-search-engine-audit/) | _arXiv link pending_ | A Sanity Protocol for Silent Failures in Darknet IR — proposed and demonstrated against an Ahmia silent failure; reproducibility bundle included | Preprint (arXiv cs.CR / cs.IR) |
 
 ---
 
 ## How to cite
 
-For the paper itself, cite the ResearchGate publication directly.
+For the paper itself, cite the arXiv preprint directly.
 
 For the code or the supplementary bundle accompanying a paper, link to the
 folder at a specific commit:
