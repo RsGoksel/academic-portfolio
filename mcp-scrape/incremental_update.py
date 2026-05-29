@@ -28,8 +28,20 @@ CHANGES = DATA / "changes"
 DATA.mkdir(parents=True, exist_ok=True)
 CHANGES.mkdir(parents=True, exist_ok=True)
 
-UA = {"User-Agent": "Mozilla/5.0 (rg-bildiri-mcp-refresh; +github.com/RsGoksel/Research-Gate-bildiri)"}
-CONCURRENCY = 12
+UA = {
+    "User-Agent": (
+        "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 "
+        "(KHTML, like Gecko) Chrome/127.0.0.0 Safari/537.36"
+    ),
+    "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+    "Accept-Language": "en-US,en;q=0.5",
+}
+CONCURRENCY = 6  # slower, more polite -- avoid tripping CDN rate limits on shared CI IPs
+
+# Sanity gate: if the rediscovery returns less than this fraction of the prior
+# snapshot, treat the run as a transient failure rather than a real listing change.
+# Prevents false "removed: 8233" reports when a CDN denies the runner's request.
+SANITY_FRACTION = 0.50
 
 
 # -----------------------------------------------------------------------------
@@ -206,6 +218,27 @@ async def refresh_one(name, listings_path, details_path, discover_fn, parse_deta
     prior_slugs = {r["slug"] for r in prior}
     discovered = await discover_fn(session, sem)
     discovered_slugs = {r["slug"] for r in discovered}
+
+    # Sanity gate -- a sub-threshold discovery is almost certainly a transient
+    # CDN denial against the runner IP, not a real ecosystem collapse. Bail out
+    # without recording a misleading "removed" diff.
+    if prior_slugs and len(discovered_slugs) < int(len(prior_slugs) * SANITY_FRACTION):
+        msg = (f"  {name}: discovered={len(discovered_slugs)} is below the sanity "
+               f"floor of {int(len(prior_slugs) * SANITY_FRACTION)} "
+               f"(prior={len(prior_slugs)}). Treating as a transient fetch failure; "
+               f"skipping diff and detail fetch for this run.")
+        print(msg, file=sys.stderr)
+        return {
+            "registry": name,
+            "discovered_total": len(discovered_slugs),
+            "prior_total": len(prior_slugs),
+            "new_slugs": [],
+            "removed_slugs": [],
+            "new_detail_count": 0,
+            "sanity_aborted": True,
+            "note": msg.strip(),
+        }
+
     new_slugs = discovered_slugs - prior_slugs
     removed_slugs = prior_slugs - discovered_slugs
     print(f"  {name}: discovered={len(discovered_slugs)}  prior={len(prior_slugs)}  "
@@ -271,11 +304,31 @@ async def main():
             ),
         )
 
-    # Daily diff report
+    # If every registry tripped the sanity gate, write a single short note and
+    # skip the per-registry section so a transient CI failure does not pollute
+    # the daily-change record.
+    all_aborted = all(r.get("sanity_aborted") for r in reports)
+
     out = CHANGES / f"{today}.md"
     lines = [f"# MCP registry refresh {today}\n"]
+    if all_aborted:
+        lines.append("Every registry tripped the rediscovery sanity gate; this "
+                     "run is treated as a transient fetch failure (most likely "
+                     "a CDN denial against the runner IP). No diff is recorded "
+                     "and no data files were modified.\n")
+        for rep in reports:
+            lines.append(f"- **{rep['registry']}**: discovered "
+                         f"{rep['discovered_total']} / prior {rep['prior_total']}")
+        out.write_text("\n".join(lines), encoding="utf-8")
+        print(f"\nDaily report (all aborted): {out}")
+        return reports
+
     for rep in reports:
         lines.append(f"## {rep['registry']}\n")
+        if rep.get("sanity_aborted"):
+            lines.append(f"_skipped: discovery returned only {rep['discovered_total']} "
+                         f"of {rep['prior_total']} prior slugs; treated as transient fetch failure._\n")
+            continue
         lines.append(f"- discovered today: {rep['discovered_total']}")
         lines.append(f"- prior snapshot: {rep['prior_total']}")
         lines.append(f"- new this run: {len(rep['new_slugs'])}")
